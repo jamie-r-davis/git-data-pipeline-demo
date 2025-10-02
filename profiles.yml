@@ -15,4 +15,5 @@ git_data_pipeline_demo:
 
     prod:
       type: duckdb
-      path: "{{ env_var('DUCKDB_URL') }}"
+      path: "{{ env_var('DUCKDB_URL') }}?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      schema: prod
