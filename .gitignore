@@ -1,0 +1,13 @@
+# jetbrains artifacts
+.idea/
+
+# python artifacts
+.venv
+
+# dbt artifacts
+logs/
+target/
+.user.yml
+
+# project artifacts
+*.duckdb
