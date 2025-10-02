@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: customer_orders
+    description: Aggregate of orders by customer
+    columns:
+      - name: customer_id
+        description: The ID of the customer
+        tests: 
+          - not_null
+
+      - name: customer_name
+        description: The name of the customer
+        tests: 
+          - not_null
+
+      - name: email
+        description: The email of the customer
+        tests: 
+          - not_null
+      
+      - name: country
+        description: The country of the customer (US or EU)
+        tests:
+          - not_null
+
+      - name: order_count
+        description: The number of orders placed by the customer
+        tests: 
+          - not_null
+      
+      - name: total_amount
+        description: The total amount of orders placed by the customer
+        tests: 
+          - not_null
+      
+      - name: first_order_at
+        description: The date of the first order placed by the customer
+        tests: 
+          - not_null
+      
+      - name: last_order_at
+        description: The date of the last order placed by the customer
+        tests: 
+          - not_null

@@ -1,0 +1,45 @@
+name: Production Deployment/Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: pyproject.toml
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --locked --all-extras
+
+      - name: Run dbt (debug + deps + seed + build)
+        env:
+          MOTHERDUCK_URL: ${{ secrets.MOTHERDUCK_URL }}
+          MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+        run: |
+          uv run dbt debug  --target prod
+          uv run dbt deps --target prod || true
+          uv run dbt seed --target prod --full-refresh
+          uv run dbt build --target prod
+
+      - name: Upload dbt artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dbt-artifacts
+          path: |
+            target/**
+            logs/**

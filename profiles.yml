@@ -1,0 +1,20 @@
+git_data_pipeline_demo:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: dev.duckdb
+      schema: main
+      threads: 4
+
+    staging:
+      type: duckdb
+      path: "{{ env_var('MOTHERDUCK_URL') }}?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      schema: main
+      threads: 4
+
+    prod:
+      type: duckdb
+      path: "{{ env_var('MOTHERDUCK_URL') }}?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      schema: main
+      threads: 4

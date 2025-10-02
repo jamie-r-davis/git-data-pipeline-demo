@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staged customers from seed data
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: email
+        tests:
+          - not_null
+      - name: country
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: Staged orders from seed data
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: amount
+        tests:
+          - not_null
+
+  - name: stg_conversion_rates__usd_eur
+    description: Staged conversion rates from seed data
+    columns:
+      - name: date
+        tests:
+          - not_null
+        
