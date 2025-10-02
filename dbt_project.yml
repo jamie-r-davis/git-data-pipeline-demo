@@ -9,9 +9,6 @@ seed-paths: ['seeds']
 analysis-paths: ['analyses']
 macro-paths: ['macros']
 
-# For small demo, use threads=1 for reproducibility
-vars: {}
-
 models:
   git_data_pipeline_demo:
     +materialized: view
