@@ -1,0 +1,22 @@
+name: 'git_data_pipeline_demo'
+version: '1.0.0'
+config-version: 2
+
+profile: 'git_data_pipeline_demo'
+
+model-paths: ['models']
+seed-paths: ['seeds']
+analysis-paths: ['analyses']
+macro-paths: ['macros']
+
+models:
+  git_data_pipeline_demo:
+    +materialized: view
+    staging:
+      +schema: staging
+    marts:
+      +schema: marts
+
+seeds:
+  git_data_pipeline_demo:
+    +schema: seeds
