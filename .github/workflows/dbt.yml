@@ -23,14 +23,12 @@ jobs:
       - name: Install the project
         run: uv sync --locked --all-extras --dev
 
-      - name: Run dbt (seed, run, test)
-        env:
-          DBT_PROFILES_DIR: profiles
+      - name: Run dbt (debug + deps + seed + build)
         run: |
           uv run dbt debug
           uv run dbt deps --target cicd || true
           uv run dbt seed --target cicd --full-refresh
-          uv run dbt build
+          uv run dbt build --target cicd
 
       - name: Upload dbt artifacts
         uses: actions/upload-artifact@v4

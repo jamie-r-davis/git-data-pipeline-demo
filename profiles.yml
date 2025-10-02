@@ -9,7 +9,7 @@ git_data_pipeline_demo:
 
     cicd:
       type: duckdb
-      path: ":memory:"
+      path: "cicd.duckdb"
       schema: main
       threads: 4
 
