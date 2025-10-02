@@ -1,8 +1,9 @@
-name: dbt CI
+name: CICD Build
 
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   dbt-build:
