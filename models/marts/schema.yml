@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: customer_orders
+    description: Aggregate of orders by customer
+    columns:
+      - name: customer_id
+        tests: [not_null]
+      - name: order_count
+        tests: [not_null]
+      - name: total_amount
+        tests: [not_null]
