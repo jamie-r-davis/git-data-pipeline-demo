@@ -14,7 +14,7 @@ with
       c.last_name,
       c.email,
       count(o.order_id) as order_count,
-      sum(o.amount) as total_amount,
+      sum(o.amount)::decimal(15,2) as total_amount,
       min(o.ordered_at) as first_order_at,
       max(o.ordered_at) as last_order_at
     from customers c
