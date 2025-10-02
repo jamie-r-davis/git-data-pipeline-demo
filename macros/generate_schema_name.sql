@@ -6,7 +6,7 @@
 
         {{ default_schema }}
 
-    {%- elif target.name == 'production' -%}
+    {%- elif target.name == 'prod' -%}
 
         {{ custom_schema_name | trim }}
 
