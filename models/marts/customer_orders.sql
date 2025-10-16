@@ -8,6 +8,7 @@ with
   ),
 
   final as (
+
     select
       c.customer_id,
       c.first_name,
@@ -17,9 +18,18 @@ with
       sum(o.amount)::decimal(15,2) as total_amount,
       min(o.ordered_at) as first_order_at,
       max(o.ordered_at) as last_order_at
+
     from customers c
-      left join orders o on o.customer_id = c.customer_id
-    group by 1,2,3,4
+
+      left join orders o on
+        o.customer_id = c.customer_id
+
+    group by
+      c.customer_id,
+      c.first_name,
+      c.last_name,
+      c.email
+
   )
 
 select * from final
