@@ -29,9 +29,10 @@ jobs:
         env:
           MOTHERDUCK_URL: ${{ secrets.MOTHERDUCK_URL }}
           MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
-          DBT_SCHEMA_PREFIX: dbt_ci_${{ github.event.pull_request.number }}_${GITHUB_SHA::7}
+          DBT_SCHEMA_PREFIX: dbt_ci_${{ github.event.pull_request.number }}_${{ GITHUB_SHA::7 }}
         run: |
           uv run dbt deps
+          uv run dbt debug --target staging
           uv run dbt build --target staging
 
       - name: Upload dbt artifacts
