@@ -16,7 +16,7 @@ with
       c.email,
       c.country,
       count(o.order_id) as order_count,
-      sum(o.amount*r.usd_eur_rate)::decimal(15,2) as total_amount_eur,
+      sum(o.amount/r.usd_eur_rate)::decimal(15,2) as total_amount_eur,
       min(o.ordered_at) as first_order_at,
       max(o.ordered_at) as last_order_at
     
