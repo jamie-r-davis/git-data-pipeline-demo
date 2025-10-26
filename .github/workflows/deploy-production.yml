@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   deploy-production:
     runs-on: ubuntu-latest
@@ -43,3 +46,15 @@ jobs:
           path: |
             target/**
             logs/**
+
+      - name: Generate Docs
+        run: |
+          uv run dbt docs generate --static
+          mkdir docs-tmp
+          cp target/static_index.html docs-tmp/index.html
+      
+      - name: Publish Docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs-tmp
+          branch: gh-pages
